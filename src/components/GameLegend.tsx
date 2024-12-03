@@ -1,4 +1,4 @@
-import { HexTile, TileType } from '../types/game';
+import { TileType } from '../types/game';
 
 const GameLegend = () => {
   const tileTypes: { type: TileType; description: string }[] = [
