@@ -4,9 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hex Golf</title>
+    <link rel="stylesheet" href="/src/index.css" />
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="flex flex-col min-h-screen">
+    <div id="root" class="flex-grow"></div>
+    <footer class="bg-gray-800 text-white text-center p-4 sticky bottom-0">
+      Built by <a href="https://warpcast.com/0xhashbrown" class="text-blue-400 hover:underline">0xHashbrown</a> using <a href="https://srcbook.com" class="text-blue-400 hover:underline">Srcbook</a> | <a href="https://warpcast.com/~/channel/srcbook" class="text-blue-400 hover:underline">/srcbook</a> | <a href="https://github.com/robertcedwards/Hex-Golf" class="text-blue-400 hover:underline">Github</a>
+    </footer>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
