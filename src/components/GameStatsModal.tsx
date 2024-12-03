@@ -5,6 +5,7 @@ import { Trophy, X } from 'lucide-react';
 interface GameStatsModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onReset: () => void;  // New prop for explicit reset
   score: number;
   par: number;
   moves: GameMove[];
@@ -13,6 +14,7 @@ interface GameStatsModalProps {
 const GameStatsModal: React.FC<GameStatsModalProps> = ({
   isOpen,
   onClose,
+  onReset,
   score,
   par,
   moves,
@@ -29,6 +31,11 @@ const GameStatsModal: React.FC<GameStatsModalProps> = ({
     acc[move.club] = (acc[move.club] || 0) + 1;
     return acc;
   }, {});
+
+  const handleClose = () => {
+    onClose();
+    onReset();
+  };
 
   return (
     <AnimatePresence>
@@ -48,7 +55,7 @@ const GameStatsModal: React.FC<GameStatsModalProps> = ({
             {/* Header */}
             <div className="bg-blue-500 p-6 text-white relative">
               <button
-                onClick={onClose}
+                onClick={handleClose}
                 className="absolute right-4 top-4 text-white/80 hover:text-white transition-colors"
               >
                 <X size={24} />
@@ -93,7 +100,7 @@ const GameStatsModal: React.FC<GameStatsModalProps> = ({
             {/* Footer */}
             <div className="p-6 bg-gray-50 border-t">
               <button
-                onClick={onClose}
+                onClick={handleClose}
                 className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
               >
                 Play Again

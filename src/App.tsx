@@ -163,6 +163,9 @@ function App() {
     setIsRolling(false);
     setShowStrokeAnimation(false);
     setShowBallAnimation(false);
+  };
+
+  const handleStatsModalClose = () => {
     setShowStatsModal(false);
   };
 
@@ -270,7 +273,8 @@ function App() {
         
         <GameStatsModal
           isOpen={showStatsModal}
-          onClose={resetGame}
+          onClose={handleStatsModalClose}
+          onReset={resetGame}
           score={gameState.currentScore}
           par={currentCourse.par}
           moves={gameState.moves}
