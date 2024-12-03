@@ -12,6 +12,7 @@ import GameStatsModal from './components/GameStatsModal';
 import ScoreBanner from './components/ScoreBanner';
 import { GameState, Card as CardType, Position, GameMove, ScoreRecord } from './types/game';
 import { courses } from './data/courses';
+import GameLegend from './components/GameLegend';
 
 const INITIAL_CARDS: CardType[] = [
   { id: '1', name: 'Driver', distance: 3, accuracy: 2 },
@@ -322,38 +323,53 @@ function App() {
                 selectedTarget={selectedTarget}
                 onTileClick={handleTileClick}
               />
+              
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-600 mb-2">Select Club</h3>
+                    <div className="flex gap-4">
+                      {gameState.cards.map(card => (
+                        <Card
+                          key={card.id}
+                          card={card}
+                          onSelect={() => handleCardSelect(card)}
+                          isSelected={selectedCard?.id === card.id}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-600 mb-2 text-center">Roll Dice</h3>
+                    <div className="flex gap-4">
+                      <div className="text-center">
+                        <span className="text-xs text-gray-500 block mb-1">Accuracy</span>
+                        <DiceRoll
+                          value={accuracyDiceValue}
+                          onRoll={handleDiceRoll}
+                          disabled={!canRoll || !selectedCard || !selectedTarget}
+                          isRolling={isRolling}
+                        />
+                      </div>
+                      <div className="text-center">
+                        <span className="text-xs text-gray-500 block mb-1">Direction</span>
+                        <DirectionDice
+                          value={directionDiceValue}
+                          onRoll={handleDiceRoll}
+                          disabled={!canRoll || !selectedCard || !selectedTarget}
+                          isRolling={isRolling}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             
-            <div className="col-span-1">
+            <div className="col-span-1 space-y-4">
+              <GameLegend />
               <GameLog moves={gameState.moves} />
-            </div>
-          </div>
-
-          <div className="flex gap-4 justify-between items-start">
-            <div className="flex gap-4">
-              {gameState.cards.map(card => (
-                <Card
-                  key={card.id}
-                  card={card}
-                  onSelect={() => handleCardSelect(card)}
-                  isSelected={selectedCard?.id === card.id}
-                />
-              ))}
-            </div>
-            
-            <div className="flex gap-4">
-              <DiceRoll
-                value={accuracyDiceValue}
-                onRoll={handleDiceRoll}
-                disabled={!canRoll || !selectedCard || !selectedTarget}
-                isRolling={isRolling}
-              />
-              <DirectionDice
-                value={directionDiceValue}
-                onRoll={handleDiceRoll}
-                disabled={!canRoll || !selectedCard || !selectedTarget}
-                isRolling={isRolling}
-              />
             </div>
           </div>
         </div>
